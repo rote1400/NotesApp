@@ -1,12 +1,25 @@
+import { useState } from "react"
 import "./styles.css"
 
 export default function App() {
+  const [newNote, setNewNote] = useState("")
+  const [notes, setNotes] = useState([])
+
+  function handleSubmitBtn(e) {
+    e.preventDefault()
+  }
+
   return (
     <div>
-      <form className="new-note-form">
+      <form onSubmit={handleSubmitBtn} className="new-note-form">
         <div className="form-row">
           <label htmlFor="note">New note</label>
-          <input type="text" id="note" />
+          <input 
+            value={newNote}
+            onChange={e => setNewNote(e.target.value)}
+            type="text" 
+            id="note" 
+          />
         </div>
         <button className="btn">Add</button>
       </form>

@@ -1,6 +1,6 @@
 body {
     background: rgb(4, 10, 56);
-    color: #d9740f;
+    color: #eee8e3;
     padding: 1rem;
     margin: 0 auto;
 }
@@ -26,7 +26,7 @@ body {
     outline: none;
     background: hsl(200, 30%, 50%);
     padding: 0.3em 0.5em;
-    color: hsl(200, 100%, 80%);
+    color: hsl(200, 24%, 93%);
 }
 
 .form-row {
