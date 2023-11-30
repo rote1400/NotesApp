@@ -103,8 +103,8 @@ body {
 
 .list li:has(input:checked) label::before {
     color: hsl(200, 30%, 50%);
-    background: hsl(200, 100%, 50%);
-    content: "v";
+    background: hsl(35, 100%, 50%);
+    content: "\2713";
     font-size: 0.8rem;
     font-weight: bold;
 }

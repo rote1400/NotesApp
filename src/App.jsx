@@ -7,8 +7,34 @@ export default function App() {
 
   function handleSubmitBtn(e) {
     e.preventDefault()
+
+    setNotes(currentNotes => {
+      return [
+        ...currentNotes,
+        { id: crypto.randomUUID(), title: newNote, completed: false},
+      ]
+    })
+
+    setNewNote("")
   }
 
+  function toggleNote(id, completed) {
+    setNotes(currentNotes => {
+      return currentNotes.map(note => {
+        if (note.id === id) {
+          return { ...note, completed}
+        }
+        return note
+      })
+    })
+  }
+
+  function deleteNote(id) {
+    setNotes(currentNotes => {
+      return currentNotes.filter(note => note.id != id)
+    })
+  }
+  
   return (
     <div>
       <form onSubmit={handleSubmitBtn} className="new-note-form">
@@ -25,22 +51,27 @@ export default function App() {
       </form>
       <h1 className="header">Todo List</h1>
       <ul className="list">
-        <li>
-          <label>
-            <input type="checkbox" /> Note 1
-          </label>
-          <button className="btn btn-danger">
-            Delete
-          </button>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" /> Note 2
-          </label>
-          <button className="btn btn-danger">
-            Delete
-          </button>
-        </li>
+        {notes.length === 0 && "Empty"}
+        {notes.map(note => {
+          return (
+            <li key={note.id}>
+              <label>
+                <input 
+                  type="checkbox"
+                  checked={note.completed}
+                  onChange={e => toggleNote(note.id, e.target.checked)} 
+                />
+                {note.title}
+              </label>
+              <button 
+                className="btn btn-danger" 
+                onClick={() => deleteNote(note.id)}
+              >
+                Delete
+              </button>
+            </li>
+          )
+        })}
       </ul>
     </div>
   )
