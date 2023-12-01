@@ -1,10 +1,21 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { NewNoteForm } from "./NewNoteForm"
 import { NotesList } from "./NotesList"
 import "./styles.css"
 
 export default function App() {
-  const [notes, setNotes] = useState([])
+  const [notes, setNotes] = useState(() => {
+    const localNotes = localStorage.getItem("NOTES")
+    if (localNotes == null) return []
+
+    return JSON.parse(localNotes)
+  })
+
+  console.log(notes)
+
+  useEffect(() => {
+    localStorage.setItem("NOTES", JSON.stringify(notes))
+  }, [notes])
 
   function addNote(title) {
     setNotes(currentNotes => {
